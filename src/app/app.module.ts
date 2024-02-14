@@ -4,9 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ApiKeyInterceptor } from 'src/Interceptors/MyHttpInterceptor';
+import { MyHttpInterceptor } from 'src/Interceptors/MyHttpInterceptor';
 import { CurrenciesComponent } from './currencies/currencies.component';
-import { currenciesInfo } from './Models';
+import { Currency } from './currency.model';
+import { DataService } from './data.service';
 
 
 @NgModule({
@@ -21,8 +22,9 @@ import { currenciesInfo } from './Models';
     HttpClientModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS,
-    useClass: ApiKeyInterceptor,
-    multi: true,},],
+    useClass: MyHttpInterceptor,
+    multi: true,},
+    DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
